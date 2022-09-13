@@ -45,15 +45,20 @@ func _input(event):
 
 
 func _physics_process(delta):
+	#Movimentacao Direcional
 	#get_8way_input()
 	
+	#Movimentacao Rotacional( tipo carro)
 	#get_rotation_input()
 	#rotation += rotation_dir * rotation_speed * delta
 	
+	#Movimentacao de mouse(rotaciona com o mouse)
 	#get_mouse_input()
 	
+	#Deslocamento
 	#velocity = move_and_slide(velocity)
 	
+	#Movimentacao mouse 2 (vai onde vc clica)
 	velocity = position.direction_to(target) * speed
 	if position.distance_to(target) > 5:
 		velocity = move_and_slide(velocity)
