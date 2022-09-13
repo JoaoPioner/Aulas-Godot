@@ -7,6 +7,7 @@
 extents = Vector2( 21, 31 )
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( 451, 290 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -15,6 +16,5 @@ hframes = 4
 vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -2, 1 )
 shape = SubResource( 1 )
