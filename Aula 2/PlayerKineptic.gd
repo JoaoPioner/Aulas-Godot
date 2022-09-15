@@ -6,17 +6,23 @@ export (float) var rotation_speed = 1.5
 var velocity = Vector2()
 var rotation_dir = 0
 onready var target = position
+onready var sprite := $AnimatedSprite
 
 func get_8way_input():
-	velocity = Vector2()
-	if Input.is_action_pressed("right"):
-		velocity.x += 1
-	if Input.is_action_pressed("left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("down"):
-		velocity.y += 1
-	if Input.is_action_pressed("up"):
-		velocity.y -= 1
+	velocity = Vector2.ZERO
+	velocity.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	velocity.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	if(velocity.x>0):
+		sprite.play("Right")
+	elif(velocity.x<0):
+		sprite.play("Left")
+	elif(velocity.y>0):
+		sprite.play("Down")
+	elif(velocity.y<0):
+		sprite.play("Up")
+	else:
+		sprite.stop()
+		sprite.frame = 0
 	velocity = velocity.normalized() * speed
 
 func get_rotation_input():
@@ -46,7 +52,7 @@ func _input(event):
 
 func _physics_process(delta):
 	#Movimentacao Direcional
-	#get_8way_input()
+	get_8way_input()
 	
 	#Movimentacao Rotacional( tipo carro)
 	#get_rotation_input()
@@ -56,11 +62,11 @@ func _physics_process(delta):
 	#get_mouse_input()
 	
 	#Deslocamento
-	#velocity = move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
 	
 	#Movimentacao mouse 2 (vai onde vc clica)
-	velocity = position.direction_to(target) * speed
-	if position.distance_to(target) > 5:
-		velocity = move_and_slide(velocity)
+	#velocity = position.direction_to(target) * speed
+	#if position.distance_to(target) > 5:
+	#	velocity = move_and_slide(velocity)
 	
 	
